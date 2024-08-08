@@ -7,7 +7,7 @@ This repository includes the implementation of the SONO framework for computing 
 
 `src`: The function `helper_funs.R` includes three manually written functions that are used in `run_sono.R`. The `sono_infreq.R` file is the main function for computing scores of nominal outlyingness, variable contribution matrix and the nominal outlyingness depth.
 
-`dependencies`: A list of the `R` packages used in `sono_infreq` and `sono_results_plots.R`.
+`dependencies`: A list of the `R` packages used in `sono_infreq.R` and `sono_results_plots.R`.
 
 `run_sono.R`: Script used to run the simulations.
 
