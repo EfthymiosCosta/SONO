@@ -1,11 +1,11 @@
-source("src/disc_scores_proj_infreq.R")
+source("src/sono.R")
 source("src/helper_funs.R")
 
 # Read processed data
 # dataset_name can be any of: flare, diabetes, lymphography, tumor, thyroid
 # Using "flare" as an example
 dataset_name <- "flare"
-dataset_path <- paste0("data/processed/", dataset_name, "_processed.rds")
+dataset_path <- paste0("data/processed/", dataset_name, ".rds")
 dataset <- readRDS(dataset_path)
 dataset <- as.data.frame(dataset)
 # Convert columns to factors
@@ -25,6 +25,7 @@ sono_out <- sono(data = dataset,
                  probs = prob_vecs,
                  alpha = 0.05,
                  r = 2, 
-                 MAXLEN = 0)
+                 MAXLEN = 0,
+                 frequent = FALSE)
 
-saveRDS(sono_out, file = paste0('output/', dataset_name, '_sono.rds'))
+save(sono_out, file = paste0('output/', dataset_name, '_sono.RData'))

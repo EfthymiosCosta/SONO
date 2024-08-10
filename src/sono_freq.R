@@ -1,5 +1,5 @@
-# Nominal scores of outlyingness - infrequent itmsets
-sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
+# Nominal scores of outlyingness - frequent itemsets
+sono_freq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
   ### INPUT CHECKS ###
   disc_cols <- c(1:ncol(data))
   if (!is.data.frame(data)){
@@ -44,8 +44,8 @@ sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
       ordered_max_probs <- order(max_probs, decreasing = TRUE)
       for (i in 1:length(disc_cols)){
         probs_vec <- Reduce(kronecker, probs[c(ordered_max_probs[1:i])])
-        s <- max(floor(as.numeric(nrow(data) * DescTools::MultinomCI(probs_vec*nrow(data), conf.level=(1-2*alpha))[, 2])))
-        if (s < 2){
+        s <- max(floor(as.numeric(nrow(data) * DescTools::MultinomCI(probs_vec*nrow(data), conf.level=(1-2*alpha))[, 3])))
+        if (s == nrow(data)){
           MAXLEN <- i-1
           break
         } else {
@@ -61,21 +61,21 @@ sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
   
   # Empty list to store probability vectors
   probs_list <- list()
-
+  
   # Empty list to store outlier scores data frames
   outlierdfs_list <- list()
-
+  
   # create corresponding list of data frames with sequences for each data point
   for (i in disc_cols){
     data[,i] <- as.numeric(data[,i])
   }
-
+  
   cat('Pre-processing done. \n')
-
+  
   dfs <- list()
   # List with infrequent items and powersets
-  infreq_list <- list()
-  for (i in 1:MAXLEN){
+  freq_list <- list()
+  for (i in c(1:MAXLEN)){
     inxs <- which(sapply(X=powerset_test, FUN=length)==i)
     aux_vec <- c()
     for (j in inxs){
@@ -86,7 +86,7 @@ sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
       }
       probs_vec <- Reduce(kronecker, probs[powerset_test[[j]]])
       s_obj <- DescTools::MultinomCI(probs_vec*nrow(data), conf.level=(1-2*alpha))
-      s <- as.numeric(nrow(data) * s_obj[, 2])
+      s <- as.numeric(nrow(data) * s_obj[, 3])
       s_probs <- s_obj[, 1]
       df <- data.frame('Sequence'=character(),
                        'Count'=integer(),
@@ -101,24 +101,24 @@ sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
                                      'Count'=as.numeric(tab)[k],
                                      'Frequent'=as.numeric(tab)[k]>=s[k],
                                      'Threshold'=s[k]))
-          if (as.numeric(tab)[k]<s[k]){
-            infreq_list[[length(infreq_list)+1]] <- list("Variables"=powerset_test[[j]],
-                                                         "Sequence"=names(tab)[k])
+          if (as.numeric(tab)[k] >= s[k]){
+            freq_list[[length(freq_list)+1]] <- list("Variables"=powerset_test[[j]],
+                                                     "Sequence"=names(tab)[k])
           }
         }
       } else {
         rows <- c()
-        if (length(infreq_list)>0){
-          for (k in 1:length(infreq_list)){
-            if (rje::is.subset(infreq_list[[k]]$Variables, powerset_test[[j]])){
-              ifelse(length(infreq_list[[k]]$Variables)>1, {
+        if (length(freq_list)>0){
+          for (k in 1:length(freq_list)){
+            if (rje::is.subset(freq_list[[k]]$Variables, powerset_test[[j]])){
+              ifelse(length(freq_list[[k]]$Variables)>1, {
                 rows <- c(rows,
                           which(sapply(1:nrow(data),
-                                       FUN = function(i) check_vecs_equal(data[i, infreq_list[[k]]$Variables],
-                                                                          vec2=as.numeric(strsplit(infreq_list[[k]]$Sequence, split="_")[[1]])))==length(infreq_list[[k]]$Variables)))
+                                       FUN = function(i) check_vecs_equal(data[i, freq_list[[k]]$Variables],
+                                                                          vec2=as.numeric(strsplit(freq_list[[k]]$Sequence, split="_")[[1]])))==length(freq_list[[k]]$Variables)))
               }, {
                 rows <- c(rows,
-                          which(data[, infreq_list[[k]]$Variables]==infreq_list[[k]]$Sequence))
+                          which(data[, freq_list[[k]]$Variables]==freq_list[[k]]$Sequence))
               })
             }
           }
@@ -127,7 +127,7 @@ sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
         if (dim(dt)[1] == 0){
           newrow <- data.frame('Sequence' = 'X',
                                'Count' = Inf,
-                               'Frequent' = FALSE,
+                               'Frequent' = TRUE,
                                'Threshold' = 0)
           df <- rbind(df, newrow)
           dfs[[nam]] <- assign(nam, df)
@@ -144,24 +144,24 @@ sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
                  {row_inx <- which(df$Sequence==rownam, arr.ind=TRUE)
                  df[row_inx, 2] <- df[row_inx, 2]+1},
                  {prod <- 1
-                  probs_sublist <- probs[powerset_test[[j]]]
-                  for (row_num in c(1:length(row))){
-                    prod <- prod*probs_sublist[[row_num]][as.numeric(row[row_num])]
-                  }
-                  newrow <- data.frame('Sequence'=rownam,
-                                       'Count'=1,
-                                       'Frequent'=FALSE,
-                                       'Threshold'=s[match_numeric(prod, s_probs)])
-                  df <- rbind(df, newrow)})
+                 probs_sublist <- probs[powerset_test[[j]]]
+                 for (row_num in c(1:length(row))){
+                   prod <- prod*probs_sublist[[row_num]][as.numeric(row[row_num])]
+                 }
+                 newrow <- data.frame('Sequence'=rownam,
+                                      'Count'=1,
+                                      'Frequent'=TRUE,
+                                      'Threshold'=s[match_numeric(prod, s_probs)])
+                 df <- rbind(df, newrow)})
         }
         # Sort by increasing sequence name to be able to do comparison with thresholds
         df <- df[order(df$Sequence, decreasing = FALSE),]
         for (k in 1:nrow(df)){
-          ifelse(df[k,2]>=df[k,4], df[k,3] <- TRUE, infreq_list[[length(infreq_list)+1]] <- list("Variables"=powerset_test[[j]],
-                                                                                           "Sequence"=df[k,1]))
+          ifelse(df[k,2] <= df[k,4], df[k,3] <- FALSE, freq_list[[length(freq_list)+1]] <- list("Variables"=powerset_test[[j]],
+                                                                                                "Sequence"=df[k,1]))
         }
       }
-      if (all(df[,4] < 2) | all(!df[,3])){
+      if (all(df[,4] == nrow(data)) | all(df[, 3])){
         aux_vec <- c(aux_vec, TRUE)
       } else {
         aux_vec <- c(aux_vec, FALSE)
@@ -176,12 +176,12 @@ sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
       break
     }
   }
-
+  
   # Save outlyingness scores based on categorical variables
   outscoredf <- data.frame('Observation'=integer(),
                            'Score'=double(),
                            stringsAsFactors = FALSE)
-
+  
   # Save cell-wise outlyingness scores
   outscoredfcells <- as.data.frame(matrix(rep(0, nrow(data)*length(disc_cols)),
                                           nrow = nrow(data)))
@@ -207,9 +207,9 @@ sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
         }
         row_inx <- which(dfs[[count]]$Sequence==rownam, arr.ind=TRUE)
         if (length(row_inx)>0){
-          add_score <- (!dfs[[count]][row_inx, 3])*(dfs[[count]][row_inx,4])/(dfs[[count]][row_inx,2]*length(row)^r)
-          nod_vec[i] <- nod_vec[i] + (!dfs[[count]][row_inx, 3])*j
-          nod_counts[i] <- nod_counts[i] + 1*(!dfs[[count]][row_inx, 3])
+          add_score <- (dfs[[count]][row_inx, 3])*(dfs[[count]][row_inx,2])/(dfs[[count]][row_inx,4]*length(row)^r)
+          nod_vec[i] <- nod_vec[i] + (dfs[[count]][row_inx, 3])*(MAXLEN - j + 1)
+          nod_counts[i] <- nod_counts[i] + 1*(dfs[[count]][row_inx, 3])
           score <- score + add_score
           if (length(disc_cols) > 1){
             for (l in powerset_test[[k]]){
@@ -233,7 +233,7 @@ sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
   }
   # Compute average depth
   nod_vec[which(nod_vec > 0)] <- nod_vec[which(nod_vec > 0)]/nod_counts[which(nod_vec > 0)]
-
+  
   cat('Outlyingness scores for discrete variables calculated.\n')
   return(list('MAXLEN'=MAXLEN, 'Discrete Scores'=outscoredf, 'Contributions'=outscoredfcells, 'Depth'=nod_vec))
 }
