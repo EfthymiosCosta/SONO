@@ -161,7 +161,7 @@ sono <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
                                                                                            "Sequence"=df[k,1]))
         }
       }
-      if (all(df[,4] < 2) | all(df[,3])){
+      if (all(df[,4] < 2) | all(!df[,3])){
         aux_vec <- c(aux_vec, TRUE)
       } else {
         aux_vec <- c(aux_vec, FALSE)
