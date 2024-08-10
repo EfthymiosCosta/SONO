@@ -5,7 +5,7 @@ This repository includes the implementation of the SONO framework for computing 
 
 `output`: This directory includes the results of running `run_sono.R` with `dataset` being one of `flare`, `diabetes`, `lymphography`, `tumor` or `thyroid` data sets.
 
-`src`: The function `helper_funs.R` includes three manually written functions that are used in `run_sono.R`. The `sono.R` file is the main function for computing scores of nominal outlyingness, variable contribution matrix and the nominal outlyingness depth. This is calling at `sono_infreq.R` when th argument `frequent = FALSE`, defining outlyingness in terms of infrequent itemsets. For the alternative definition of outliers as too frequent itemsets, the function `sono_freq.R` is called instead.
+`src`: The function `helper_funs.R` includes three manually written functions that are used in `run_sono.R`. The `sono.R` file is the main function for computing scores of nominal outlyingness, variable contribution matrix and the nominal outlyingness depth. This is calling the `sono_infreq.R` function when setting argument `frequent = FALSE`, defining outlyingness in terms of infrequent itemsets. For the alternative definition of outliers as too frequent itemsets, the function `sono_freq.R` is called instead.
 
 `dependencies`: A list of the `R` packages used in `sono_infreq.R` and `sono_results_plots.R`.
 
