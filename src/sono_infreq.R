@@ -1,5 +1,5 @@
 # Nominal scores of outlyingness - infrequent itmsets
-sono_infrq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
+sono_infreq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
   ### INPUT CHECKS ###
   disc_cols <- c(1:ncol(data))
   if (!is.data.frame(data)){
