@@ -75,7 +75,7 @@ sono_freq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
   dfs <- list()
   # List with infrequent items and powersets
   freq_list <- list()
-  for (i in c(1:MAXLEN)){
+  for (i in rev(1:MAXLEN)){
     inxs <- which(sapply(X=powerset_test, FUN=length)==i)
     aux_vec <- c()
     for (j in inxs){
@@ -93,37 +93,46 @@ sono_freq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
                        'Frequent'=logical(),
                        'Threshold' =numeric(),
                        stringsAsFactors = FALSE)
+      rows <- c()
+      if (length(freq_list)>0){
+        for (k in 1:length(freq_list)){
+          if (rje::is.subset(powerset_test[[j]], freq_list[[k]]$Variables)){
+            loc_inx <- which(freq_list[[k]]$Variables %in% powerset_test[[j]])
+            ifelse(length(powerset_test[[j]])>1, {
+              rows <- c(rows,
+                        which(sapply(1:nrow(data),
+                                     FUN = function(i) check_vecs_equal(data[i, powerset_test[[j]]],
+                                                                        vec2=as.numeric(strsplit(freq_list[[k]]$Sequence, split="_")[[1]])[loc_inx]))==length(powerset_test[[j]])))
+            }, {
+              rows <- c(rows,
+                        which(data[, powerset_test[[j]]]==as.numeric(strsplit(freq_list[[k]]$Sequence, split = "_")[[1]])[loc_inx]))
+            })
+          }
+        }
+      }
+      ifelse(length(rows)>0, dt <- data[-rows,powerset_test[[j]]], dt <- data[,powerset_test[[j]]])
       if (i==1){
-        dt <- data[, powerset_test[[j]]]
+        if (length(dt) == 0){
+          newrow <- data.frame('Sequence' = 'X',
+                               'Count' = Inf,
+                               'Frequent' = TRUE,
+                               'Threshold' = 0)
+          df <- rbind(df, newrow)
+          dfs[[nam]] <- assign(nam, df)
+          next
+        }
         tab <- table(dt)
         for (k in 1:length(tab)){
           df <- rbind(df, data.frame('Sequence'=names(tab)[k],
                                      'Count'=as.numeric(tab)[k],
-                                     'Frequent'=as.numeric(tab)[k]>=s[k],
-                                     'Threshold'=s[k]))
-          if (as.numeric(tab)[k] >= s[k]){
+                                     'Frequent'=as.numeric(tab)[k]>=s[as.numeric(names(tab)[k])],
+                                     'Threshold'=s[as.numeric(names(tab)[k])]))
+          if (as.numeric(tab)[k] >= s[as.numeric(names(tab)[k])]){
             freq_list[[length(freq_list)+1]] <- list("Variables"=powerset_test[[j]],
                                                      "Sequence"=names(tab)[k])
           }
         }
       } else {
-        rows <- c()
-        if (length(freq_list)>0){
-          for (k in 1:length(freq_list)){
-            if (rje::is.subset(freq_list[[k]]$Variables, powerset_test[[j]])){
-              ifelse(length(freq_list[[k]]$Variables)>1, {
-                rows <- c(rows,
-                          which(sapply(1:nrow(data),
-                                       FUN = function(i) check_vecs_equal(data[i, freq_list[[k]]$Variables],
-                                                                          vec2=as.numeric(strsplit(freq_list[[k]]$Sequence, split="_")[[1]])))==length(freq_list[[k]]$Variables)))
-              }, {
-                rows <- c(rows,
-                          which(data[, freq_list[[k]]$Variables]==freq_list[[k]]$Sequence))
-              })
-            }
-          }
-        }
-        ifelse(length(rows)>0, dt <- data[-rows,powerset_test[[j]]], dt <- data[,powerset_test[[j]]])
         if (dim(dt)[1] == 0){
           newrow <- data.frame('Sequence' = 'X',
                                'Count' = Inf,
@@ -154,12 +163,12 @@ sono_freq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
                                       'Threshold'=s[match_numeric(prod, s_probs)])
                  df <- rbind(df, newrow)})
         }
-        # Sort by increasing sequence name to be able to do comparison with thresholds
-        df <- df[order(df$Sequence, decreasing = FALSE),]
-        for (k in 1:nrow(df)){
-          ifelse(df[k,2] <= df[k,4], df[k,3] <- FALSE, freq_list[[length(freq_list)+1]] <- list("Variables"=powerset_test[[j]],
-                                                                                                "Sequence"=df[k,1]))
-        }
+      }
+      # Sort by increasing sequence name to be able to do comparison with thresholds
+      df <- df[order(df$Sequence, decreasing = FALSE),]
+      for (k in 1:nrow(df)){
+        ifelse(df[k,2] <= df[k,4], df[k,3] <- FALSE, freq_list[[length(freq_list)+1]] <- list("Variables"=powerset_test[[j]],
+                                                                                              "Sequence"=df[k,1]))
       }
       if (all(df[,4] == nrow(data)) | all(df[, 3])){
         aux_vec <- c(aux_vec, TRUE)
@@ -193,7 +202,7 @@ sono_freq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
     cat('Observation', i, 'of', nrow(data), '\n')
     score <- 0
     count <- 1
-    for (j in 1:MAXLEN){
+    for (j in rev(1:MAXLEN)){
       inxs <- which(sapply(X=powerset_test, FUN=length)==j)
       for (k in inxs){
         row <- data[i,powerset_test[[k]]]
