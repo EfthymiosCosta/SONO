@@ -217,7 +217,7 @@ sono_freq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
         row_inx <- which(dfs[[count]]$Sequence==rownam, arr.ind=TRUE)
         if (length(row_inx)>0){
           add_score <- (dfs[[count]][row_inx, 3])*(dfs[[count]][row_inx,2])/(dfs[[count]][row_inx,4]*length(row)^r)
-          nod_vec[i] <- nod_vec[i] + (dfs[[count]][row_inx, 3])*(MAXLEN - j + 1)
+          nod_vec[i] <- nod_vec[i] + (dfs[[count]][row_inx, 3]) * (MAXLEN - j + 1)
           nod_counts[i] <- nod_counts[i] + 1*(dfs[[count]][row_inx, 3])
           score <- score + add_score
           if (length(disc_cols) > 1){
