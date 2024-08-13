@@ -28,4 +28,4 @@ sono_out <- sono(data = dataset,
                  MAXLEN = 0,
                  frequent = FALSE)
 
-save(sono_out, file = paste0('output/', dataset_name, '_sono.RData'))
+saveRDS(sono_out, file = paste0('output/', dataset_name, '_sono.rds'))
