@@ -1,0 +1,18 @@
+Package: SONO
+Title: Scores of Nominal Outlyingness (SONO)
+Version: 1.0
+Authors@R: 
+    person("Efthymios", "Costa", , "efthymios.costa17@imperial.ac.uk", role = c("aut", "cre"))
+Description: Computes scores of outlyingness for data sets consisting of nominal variables. Also includes various evaluation metrics for assessing performance of outlier identification algorithms which produce scores of outlyingness.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    data.table (>= 1.14.0),
+    DescTools (>= 0.99.0),
+    ggplot2 (>= 3.3.5),
+    Rdpack (>= 2.0),
+    rje (>= 0.9)
+RdMacros:
+    Rdpack
