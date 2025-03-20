@@ -10,8 +10,9 @@ The `SONO` (Scores Of Nominal Outlyingness) `R` package includes a function that
 A detailed description of the methods included in the package can be found in [Costa, E., & Papatsouma, I. (2025). A novel framework for quantifying nominal outlyingness.](https://arxiv.org/abs/2408.07463)
 
 # Installation
-The package can be installed using [devtools](https://www.r-project.org/nosvn/pandoc/devtools.html).
+The package can be installed using [devtools](https://devtools.r-lib.org/).
 ```R
 # install.packages("devtools")
 devtools::install_github('EfthymiosCosta/SONO')
 ```
+

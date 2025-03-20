@@ -12,7 +12,7 @@ Imports: data.table (>= 1.14.0), DescTools (>= 0.99.0), ggplot2 (>=
         3.3.5), Rdpack (>= 2.0), rje (>= 0.9)
 RdMacros: Rdpack
 NeedsCompilation: no
-Packaged: 2025-03-20 10:39:04 UTC; ec1917
+Packaged: 2025-03-20 12:50:26 UTC; ec1917
 Author: Efthymios Costa [aut, cre]
 Maintainer: Efthymios Costa <efthymios.costa17@imperial.ac.uk>
-Built: R 4.4.2; ; 2025-03-20 10:39:14 UTC; windows
+Built: R 4.4.2; ; 2025-03-20 12:51:07 UTC; windows
