@@ -1,0 +1,6 @@
+MAXLEN_est              Estimate MAXLEN
+avg_rank_outs           Average Rank Of Outlier
+recall_at_k             Recall@K
+roc_auc                 ROC AUC function
+sono                    SONO (Scores Of Nominal Outlyingness)
+vis_contribs            Visualise Contribution Matrix
