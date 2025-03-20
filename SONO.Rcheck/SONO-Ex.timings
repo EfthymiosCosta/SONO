@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name	user	system	elapsed
 MAXLEN_est	1.06	0.13	1.63	
 avg_rank_outs	0.05	0.00	0.09	
@@ -5,3 +6,12 @@ recall_at_k	0.05	0.00	0.06
 roc_auc	0.03	0.00	0.06	
 sono	0.02	0.00	0.08	
 vis_contribs	0.21	0.00	0.54	
+=======
+name	user	system	elapsed
+MAXLEN_est	1.06	0.13	1.63	
+avg_rank_outs	0.05	0.00	0.09	
+recall_at_k	0.05	0.00	0.06	
+roc_auc	0.03	0.00	0.06	
+sono	0.02	0.00	0.08	
+vis_contribs	0.21	0.00	0.54	
+>>>>>>> 5b1033a (First commit)
