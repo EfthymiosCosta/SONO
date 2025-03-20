@@ -13,7 +13,6 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' dt <- as.data.frame(sample(c(1:2), 100, replace = TRUE, prob = c(0.5, 0.5)))
 #' dt <- cbind(dt, sample(c(1:3), 100, replace = TRUE, prob = c(0.5, 0.3, 0.2)))
 #' dt[, 1] <- as.factor(dt[, 1])
@@ -23,7 +22,7 @@
 #' alpha = 0.01, r = 2, MAXLEN = 0, frequent = FALSE)
 #' # Suppose observations 1 up to 5 are outliers
 #' avg_rank_outs(scores = sono_out[[2]][, 2], outs = c(1:5), ties = "min")
-#' }
+#'
 avg_rank_outs <- function(scores, outs, ties = "min"){
   ### INPUT CHECKS ###
   if (max(outs) > length(scores)){

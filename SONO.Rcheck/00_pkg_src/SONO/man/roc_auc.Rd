@@ -21,7 +21,6 @@ Function computing the ROC AUC given a vector with scores of outlyingness. The c
 \insertCite{hanley_meaning_1982;textual}{SONO}.
 }
 \examples{
-\donttest{
 dt <- as.data.frame(sample(c(1:2), 100, replace = TRUE, prob = c(0.5, 0.5)))
 dt <- cbind(dt, sample(c(1:3), 100, replace = TRUE, prob = c(0.5, 0.3, 0.2)))
 dt[, 1] <- as.factor(dt[, 1])
@@ -36,7 +35,7 @@ frequent = FALSE)
 # Suppose observations 1 up to 5 are outliers
 roc_auc(scores = sono_out[[2]][, 2], outs = c(1:5),
 grid = c(1, 2.5, seq(5, 50, by = 5))/100)
-}
+
 }
 \references{
 {

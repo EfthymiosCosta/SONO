@@ -1,4 +1,4 @@
-sono_infreq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
+sono_infreq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0, verbose = TRUE){
   ### INPUT CHECKS ###
   disc_cols <- c(1:ncol(data))
   if (!is.data.frame(data)){
@@ -64,11 +64,20 @@ sono_infreq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
         }
       }
     }
+  } else {
+    MAXLEN_estimate <- MAXLEN_est(data, probs, alpha, frequent = FALSE)
+    if (MAXLEN_estimate < MAXLEN){
+      warning('MAXLEN value larger than estimated; MAXLEN set to ', MAXLEN_estimate)
+    }
   }
-  cat('MAXLEN:', MAXLEN, '\n')
+  if (verbose){
+    message('MAXLEN: ', MAXLEN)
+  }
   # Get power set
   powerset_test <- rje::powerSet(disc_cols, MAXLEN)
-  cat('Power set object created. \n')
+  if (verbose){
+    message('Power set object created.')
+  }
 
   # Empty list to store probability vectors
   probs_list <- list()
@@ -81,7 +90,9 @@ sono_infreq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
     data[,i] <- as.numeric(data[,i])
   }
 
-  cat('Pre-processing done. \n')
+  if (verbose){
+    message('Pre-processing done.')
+  }
 
   dfs <- list()
   # List with infrequent items and powersets
@@ -255,6 +266,8 @@ sono_infreq <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0){
   # Compute average depth
   nod_vec[which(nod_vec > 0)] <- nod_vec[which(nod_vec > 0)]/nod_counts[which(nod_vec > 0)]
 
-  cat('Outlyingness scores for discrete variables calculated.\n')
+  if (verbose){
+    message('Outlyingness scores for discrete variables calculated.')
+  }
   return(list('MAXLEN'=MAXLEN, 'Discrete Scores'=outscoredf, 'Contributions'=outscoredfcells, 'Depth'=nod_vec))
 }

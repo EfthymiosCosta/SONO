@@ -20,7 +20,6 @@ Recall values at the points of the provided grid.
 Function computing the recall based on the top K\% scores of outlyingness.
 }
 \examples{
-\donttest{
 dt <- as.data.frame(sample(c(1:2), 100, replace = TRUE, prob = c(0.5, 0.5)))
 dt <- cbind(dt, sample(c(1:3), 100, replace = TRUE, prob = c(0.5, 0.3, 0.2)))
 dt[, 1] <- as.factor(dt[, 1])
@@ -36,5 +35,5 @@ frequent = FALSE)
 recall_at_k(scores = sono_out[[2]][, 2],
 outs = c(1:5),
 grid = c(1, 2.5, seq(5, 50, by = 5))/100)
-}
+
 }
