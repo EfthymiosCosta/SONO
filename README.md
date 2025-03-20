@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Scores Of Nominal Outlyingness (SONO)
 This repository includes the implementation of the SONO framework for computing scores of nominal outlyingness for nominal data sets.
 
@@ -31,4 +30,4 @@ The package can be installed using [devtools](https://devtools.r-lib.org/).
 # install.packages("devtools")
 devtools::install_github('EfthymiosCosta/SONO')
 ```
->>>>>>> 3310a211b6032a57a042f60aafeca5ff49aea930
+
