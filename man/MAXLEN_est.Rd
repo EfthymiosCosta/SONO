@@ -17,7 +17,7 @@ frequency thresholds should be for itemsets of different length, used for outlie
 greater value leads to a much more conservative algorithm. Default value is 0.01.}
 
 \item{frequent}{Logical determining whether highly frequent or highly infrequent itemsets are considered as outliers. Defaults
-to FALSE, treating highly infrequent itemsets are outlying.}
+to FALSE, treating highly infrequent itemsets as outlying.}
 }
 \value{
 Estimated MAXLEN value.
@@ -28,14 +28,13 @@ the ideas described in \insertCite{costa_novel_2025;textual}{SONO}, using simult
 \insertCite{sison_simultaneous_1995;textual}{SONO}.
 }
 \examples{
-\donttest{
 dt <- as.data.frame(sample(c(1:2), 100, replace = TRUE, prob = c(0.5, 0.5)))
 dt <- cbind(dt, sample(c(1:3), 100, replace = TRUE, prob = c(0.5, 0.3, 0.2)))
 dt[, 1] <- as.factor(dt[, 1])
 dt[, 2] <- as.factor(dt[, 2])
 colnames(dt) <- c('V1', 'V2')
 MAXLEN_est(data = dt, probs = list(c(0.5, 0.5), c(1/3, 1/3, 1/3)), alpha = 0.01, frequent = FALSE)
-}
+
 }
 \references{
 {
