@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 avg_rank_outs	avg_rank_outs
 MAXLEN_est	MAXLEN_est
 recall_at_k	recall_at_k
 roc_auc	roc_auc
 sono	sono
 vis_contribs	vis_contribs
-=======
-avg_rank_outs	avg_rank_outs
-MAXLEN_est	MAXLEN_est
-recall_at_k	recall_at_k
-roc_auc	roc_auc
-sono	sono
-vis_contribs	vis_contribs
->>>>>>> 5b1033a (First commit)

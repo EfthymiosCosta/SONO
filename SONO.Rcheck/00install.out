@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 * installing *source* package 'SONO' ...
 ** using staged installation
 ** R
@@ -11,17 +10,3 @@
 ** testing if installed package can be loaded from final location
 ** testing if installed package keeps a record of temporary installation path
 * DONE (SONO)
-=======
-* installing *source* package 'SONO' ...
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (SONO)
->>>>>>> 5b1033a (First commit)

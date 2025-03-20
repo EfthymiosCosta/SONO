@@ -6,7 +6,8 @@
 #' r> 0, \ i=1,\dots,n,}
 #' for highly infrequent itemsets and:
 #' \deqn{s(\boldsymbol{x}_i)=\sum_{\substack{d \subseteq \boldsymbol{x}_{i}: \\ \text{supp}(d) \notin [0, \sigma_d), \\ \lvert d \rvert \leq \mathrm{MAXLEN}}} \frac{\text{supp}(d)}{\sigma_d \times \left( \text{MAXLEN} - \lvert d \rvert + 1 \right)^r}, \\
-#' r> 0, \ i=1,\dots,n.}
+#' r> 0, \ i=1,\dots,n,}
+#' for highly frequent itemsets.
 #' In the above, \eqn{\text{supp}(d)} is the support of itemset \eqn{d}, \eqn{\sigma_d} is the the maximum/minimum support threshold and \eqn{\text{MAXLEN}} is the maximum length of sequences considered, while \eqn{r} is an exponent term to be determined by the user.
 #'
 #' @param data Dataset; needs to be of class data.frame and consist of factor variables only.
@@ -19,9 +20,12 @@
 #' itemsets of greater length will have in the overall score. It is suggested that this is not much larger than 3. Default value is 2.
 #' @param MAXLEN Maximum itemset sequence length to be considered. Default value is 0 which calculates MAXLEN according to a criterion
 #' on the sparsity caused by the total combinations that can be encountered as sequences of greater length are taken into account.
-#' Otherwise, MAXLEN can take any value from 1 up to the total number of discrete variables included in the data set.
+#' Otherwise, MAXLEN can take any value from 1 up to the total number of discrete variables included in the data set. If user-given MAXLEN is
+#' larger than the estimated value, MAXLEN will default to the latter and a warning message will be displayed, so that
+#' redunand computations are avoided.
 #' @param frequent Logical determining whether highly frequent or highly infrequent itemsets are considered as outliers. Defaults
 #' to FALSE, treating highly infrequent itemsets are outlying.
+#' @param verbose Defaults to TRUE to print progress messages. Change to FALSE to suppress.
 #'
 #' @returns A list with 4 elements. The first element is the value of MAXLEN. The second element corresponds to a data frame
 #' with 2 columns; one for the observation numbers and one with the final score of outlyingness.
@@ -35,7 +39,6 @@
 #' @importFrom Rdpack reprompt
 #'
 #' @examples
-#' \donttest{
 #' dt <- as.data.frame(sample(c(1:2), 100, replace = TRUE, prob = c(0.5, 0.5)))
 #' dt <- cbind(dt, sample(c(1:3), 100, replace = TRUE, prob = c(0.5, 0.3, 0.2)))
 #' dt[, 1] <- as.factor(dt[, 1])
@@ -47,12 +50,13 @@
 #' r = 2,
 #' MAXLEN = 0,
 #' frequent = FALSE)
-#' }
-sono <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0, frequent = FALSE){
+#'
+sono <- function(data, probs, alpha = 0.01, r = 2, MAXLEN = 0, frequent = FALSE,
+                 verbose = TRUE){
   if (frequent){
-    sono_out <- sono_freq(data, probs, alpha, r, MAXLEN)
+    sono_out <- sono_freq(data, probs, alpha, r, MAXLEN, verbose = verbose)
   } else {
-    sono_out <- sono_infreq(data, probs, alpha, r, MAXLEN)
+    sono_out <- sono_infreq(data, probs, alpha, r, MAXLEN, verbose = verbose)
   }
   return(sono_out)
 }
