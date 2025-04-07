@@ -7,7 +7,7 @@
 * running under: Windows 11 x64 (build 22631)
 * using session charset: UTF-8
 * checking for file 'SONO/DESCRIPTION' ... OK
-* this is package 'SONO' version '1.1'
+* this is package 'SONO' version '1.2'
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -19,6 +19,7 @@
 * checking whether package 'SONO' can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
+* checking 'build' directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
@@ -45,7 +46,12 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
+* checking installed files from 'inst/doc' ... OK
+* checking files in 'vignettes' ... OK
 * checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
 Status: OK

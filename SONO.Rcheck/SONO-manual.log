@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.11.25) (preloaded format=pdflatex 2022.12.4)  20 MAR 2025 12:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.11.25) (preloaded format=pdflatex 2022.12.4)  7 APR 2025 20:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**C:/Users/ec1917/AppData/Local/Temp/Rtmp0iIKNi/Rd2pdf817c3c554450/Rd2.tex
-(C:/Users/ec1917/AppData/Local/Temp/Rtmp0iIKNi/Rd2pdf817c3c554450/Rd2.tex
+**C:/Users/ec1917/AppData/Local/Temp/RtmpEdCuwb/Rd2pdf35a873ce769f/Rd2.tex
+(C:/Users/ec1917/AppData/Local/Temp/RtmpEdCuwb/Rd2pdf35a873ce769f/Rd2.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2022-11-02>
 (C:\Users\ec1917\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
@@ -401,14 +401,14 @@ Package hyperref Info: Link coloring ON on input line 8.
 \@outlinefile=\write4
 \openout4 = `Rd2.out'.
 
-LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 30
+LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 32
 .
 
 (C:\Users\ec1917\AppData\Local\Programs\MiKTeX\tex/latex/inconsolata\t1zi4.fd
 File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 10.0pt on input line 30.
+(Font)              scaled to size 10.0pt on input line 32.
 
 (Rd2.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 1.
@@ -436,36 +436,36 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 
 {C:/Users/ec1917/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 61.
+(Font)              scaled to size 9.0pt on input line 63.
 LaTeX Font Info:    Trying to load font information for TS1+zi4 on input line 6
-6.
+8.
 
 (C:\Users\ec1917\AppData\Local\Programs\MiKTeX\tex/latex/inconsolata\ts1zi4.fd
 File: ts1zi4.fd 2018/01/14 TS1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `TS1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 66.
+(Font)              scaled to size 9.0pt on input line 68.
 [2]
-Overfull \hbox (21.12675pt too wide) in paragraph at lines 110--113
+Overfull \hbox (21.12675pt too wide) in paragraph at lines 112--115
 []\T1/ptm/m/n/10 Costa E, Pa-p-at-souma I (2025). ``A novel frame-work for quan
 -ti-fy-ing nom-i-nal out-ly-ing-ness.'' [][]doi:10.48550/
  []
 
 
-Overfull \hbox (23.23488pt too wide) in paragraph at lines 128--128
+Overfull \hbox (23.23488pt too wide) in paragraph at lines 130--130
  []\T1/zi4/m/n/9 MAXLEN_est(data = dt, probs = list(c(0.5, 0.5), c(1/3, 1/3, 1/
 3)), alpha = 0.01, frequent = FALSE)[] 
  []
 
 [3]
-Overfull \hbox (25.86769pt too wide) in paragraph at lines 207--211
+Overfull \hbox (25.86769pt too wide) in paragraph at lines 209--213
 \T1/ptm/m/n/10 ter-is-tic (ROC) curve.'' \T1/ptm/m/it/10 Ra-di-ol-ogy\T1/ptm/m/
 n/10 , \T1/ptm/b/n/10 143\T1/ptm/m/n/10 (1), 29--36. ISSN 0033-8419, [][]doi:10
 .1148/radiology.143.1.7063747[][]. 
  []
 
 [4] [5]
-Overfull \hbox (21.12675pt too wide) in paragraph at lines 296--299
+Overfull \hbox (21.12675pt too wide) in paragraph at lines 298--301
 []\T1/ptm/m/n/10 Costa E, Pa-p-at-souma I (2025). ``A novel frame-work for quan
 -ti-fy-ing nom-i-nal out-ly-ing-ness.'' [][]doi:10.48550/
  []
@@ -480,7 +480,7 @@ Package rerunfilecheck Info: File `Rd2.out' has not changed.
 Here is how much of TeX's memory you used:
  10370 strings out of 475281
  162197 string characters out of 2773593
- 501885 words of memory out of 3000000
+ 502885 words of memory out of 3000000
  31614 multiletter control sequences out of 15000+600000
  507467 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -505,7 +505,7 @@ Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ec1917/AppData
 /Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/ec1917/AppDat
 a/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/ec1917/AppDa
 ta/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (8 pages, 207488 bytes).
+Output written on Rd2.pdf (8 pages, 207818 bytes).
 PDF statistics:
  225 PDF objects out of 1000 (max. 8388607)
  56 named destinations out of 1000 (max. 500000)
