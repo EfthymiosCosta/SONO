@@ -1,4 +1,4 @@
-# SONO (Scores Of Nominal Outlyingness) <a><img src='man/figures/SONO_logo.png' align="right" height="139" /></a>
+# SONO (Scores Of Nominal Outlyingness) <a><img src='man/figures/logo.png' align="right" height="139" /></a>
 [![CRAN status](https://www.r-pkg.org/badges/version/SONO)](https://CRAN.R-project.org/package=SONO)
 [![CRAN status](https://www.r-pkg.org/badges/last-release/SONO)](https://CRAN.R-project.org/package=SONO)
 [![CRAN downloads this month](https://cranlogs.r-pkg.org/badges/SONO)](https://cran.r-project.org/package=SONO)
