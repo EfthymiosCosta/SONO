@@ -3,10 +3,10 @@ bibentry(
   title    = "SONO: Scores of Nominal Outlyingness",
   author   = "Efthymios Costa",
   year     = "2025",
-  note     = "version 0.1.0",
-  url      = "https://github.com/EfthymiosCosta/SONO",
+  note     = "version 1.2",
+  url      = "https://cran.r-project.org/package=SONO",
   textVersion = paste("Costa, E. (2025).",
                       "SONO: Scores of Nominal Outlyingness.",
-                      "Version 0.1.0. Imperial College London. London, United Kingdom.",
-                      "URL: https://github.com/EfthymiosCosta/SONO")
+                      "Version 1.2. Imperial College London. London, United Kingdom.",
+                      "URL: https://cran.r-project.org/package=SONO")
 )
